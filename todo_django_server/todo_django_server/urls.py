@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+import TodoApp.views as tv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', tv.index, name = "index"),
+    path('index/new/', tv.new, name = "new"),
+    path('index/create/',tv.create, name = 'create'),
 ]
