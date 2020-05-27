@@ -18,16 +18,12 @@ def index(request):
     return HttpResponse("Nope.")
 
 def new(request):
-    print(request.POST)
-    
     if request.method == 'POST':
         res = requests.post("http://127.0.0.1:8080/todo/posts/", data = request.POST)
+    # else:   # GET이면 form 화면
+    #     return render(request, 'new.html')
     
-    else:
-        return render(request, 'new.html')
-    
-    print(res.status_code)
     if res.status_code == 201:
-        data = res.content     # api로 보내기 위해 object -> python 
-        return HttpResponse(data)
+        data = res.content
+        return redirect('../')
     return HttpResponse("fail")

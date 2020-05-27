@@ -20,5 +20,5 @@ import TodoApp.views as tv
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', tv.index, name = "index"),
-    path('new/', tv.new, name = "new"),
+    path('', tv.new, name = "new"),
 ]

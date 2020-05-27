@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Todo List</title>
+    </head>
+    <body>
+        <h1>Just Do It!</h1>
+        {% for d in data %}
+        <h3>{{d.title}}</h3>
+        <p>{{d.content}}</p>
+        <br />
+        {% endfor %} <a href="{% url 'new' %}">추가하기</a>
+    </body>
+</html>

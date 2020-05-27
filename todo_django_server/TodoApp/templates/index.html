@@ -1,11 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Todo List</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     </head>
     <body>
-        <h1>아 이거슨 투두 리스트여</h1>
-        {% for d in data %} {{ d.id }} {{d.title}} {{d.content}}<br />
-        {% endfor %} <a href="{% url 'new' %}">추가하기</a>
+        <h1>Just Do It!</h1>
+        <form action="{% url 'new' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="todo" placeholder="what to do ?" />
+            <button>ADD</button>
+        </form>
+        {% for d in data %}
+        <h3>{{d.title}}</h3>
+        <br />
+        {% endfor %}
     </body>
 </html>
