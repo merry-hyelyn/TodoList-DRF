@@ -20,10 +20,37 @@ def index(request):
 def new(request):
     if request.method == 'POST':
         res = requests.post("http://127.0.0.1:8080/todo/posts/", data = request.POST)
-    # else:   # GET이면 form 화면
-    #     return render(request, 'new.html')
+    else:   # GET이면 form 화면
+        return render(request, 'new.html')
     
     if res.status_code == 201:
         data = res.content
         return redirect('../')
     return HttpResponse("fail")
+
+def delete(request, id):
+    pass
+
+def detail(request, todo_id):
+    res = requests.get("http://127.0.0.1:8080/todo/posts/",params = request.GET)
+    datas = json.loads(res.content)
+    for data in datas:
+        if todo_id == data["id"]:
+            detail_todo = {
+                'title': data['title'],
+                'content' : data['content'],
+            }
+    print(detail_todo)
+    return render(request, "detail.html", {'detail' : detail_todo})
+
+def update(request, todo_id):
+    # res = requests.get("http://127.0.0.1:8080/todo/posts/",params = request.GET)
+    # datas = res.content
+    # for data in datas:
+    #     if todo_id == data["id"]:
+    #         detail_todo = {
+    #             'title': data['title'],
+    #             'content' : data['content'],
+    #         }
+    # return 
+    pass

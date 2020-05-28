@@ -6,15 +6,28 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     </head>
     <body>
-        <h1>Just Do It!</h1>
-        <form action="{% url 'new' %}" method="POST">
-            {% csrf_token %}
-            <input type="text" name="todo" placeholder="what to do ?" />
-            <button>ADD</button>
-        </form>
-        {% for d in data %}
-        <h3>{{d.title}}</h3>
+        <p class="title">Just Do It!</p>
+        <section class="setTodo">
+            <form action="{% url 'new' %}" method="POST">
+                {% csrf_token %}
+                <h4>Title :</h4>
+                <input type="text" name="title" placeholder="what to do ?" />
+                <h4>content:</h4>
+                <textarea cols="30" rows="2" name="content"></textarea>
+                <button>ADD</button>
+            </form>
+        </section>
+        <section class="todoLsit">
+            <div class="todo-list">
+                {% for d in data %}
+                <p>
+                    <button class="checkBtn">❌</button> {{d.title}}
+                    <a href="{% url 'detail' d.id %}">detail</a>
+                </p>
+                {% endfor %}
+            </div>
+        </section>
         <br />
-        {% endfor %}
+        <script src="{% static 'js/todo.js' %}"></script>
     </body>
 </html>
